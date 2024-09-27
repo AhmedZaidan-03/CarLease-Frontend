@@ -1,9 +1,28 @@
+import 'package:carlease_frontend/models/car.dart';
+import 'package:carlease_frontend/screens/home_screen.dart';
 import 'package:carlease_frontend/screens/loginScreen.dart';
 import 'package:carlease_frontend/screens/signinScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  Car car = Car(
+      marke: "Toyota",
+      modell: "Corolla",
+      car_id: "001",
+      year_modell: 2020,
+      drivmedel: "Bensin",
+      price: 150000,
+      hastkraft: 120,
+      kaross: "Sedan",
+      available: true,
+      isLiked: false,
+      pic: [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Cg6yK-dL78uo4KTKqEBzS-5oom3Ot2--3w&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Cg6yK-dL78uo4KTKqEBzS-5oom3Ot2--3w&s'
+      ]); // Använd riktiga bild-URL:er här
+
+  runApp(ChangeNotifierProvider(create: (context) => car, child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: firstScreen(),
+      home: HomeScreen(),
     );
   }
 }

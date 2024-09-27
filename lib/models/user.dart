@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:carlease_frontend/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,21 +7,24 @@ class User {
   String name;
   String email;
   String password;
+  List<String> favorites = [];
 
-  User(
-      {this.user_id,
-      required this.name,
-      required this.email,
-      required this.password});
-
-  List<User> favoCara = [];
+  User({
+    this.user_id,
+    required this.name,
+    required this.email,
+    required this.password,
+    this.favorites = const [],
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        user_id: json['user_id'],
-        name: json['name'],
-        email: json['email'],
-        password: json['password']);
+      user_id: json['user_id'],
+      name: json['name'],
+      email: json['email'],
+      password: json['password'],
+      favorites: List<String>.from(json['favorites'] ?? []),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -31,7 +32,8 @@ class User {
       'user_id': user_id,
       'name': name,
       'email': email,
-      'password': password
+      'password': password,
+      'favorites': favorites
     };
   }
 }
@@ -58,8 +60,8 @@ Future<void> login_post(BuildContext context, User user) async {
 
   if (response.statusCode == 200) {
     print(response.body);
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => home()));
+    // Navigator.pushReplacement(
+    //     context, MaterialPageRoute(builder: (context) => home()));
     return;
   }
   print("Error: ${response.body}");

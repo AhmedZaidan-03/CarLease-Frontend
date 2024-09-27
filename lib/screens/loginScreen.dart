@@ -1,5 +1,6 @@
 import 'package:carlease_frontend/main.dart';
 import 'package:carlease_frontend/models/user.dart';
+import 'package:carlease_frontend/screens/home_screen.dart';
 import 'package:carlease_frontend/screens/signinScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -102,6 +103,10 @@ class _loginPageState extends State<Loginscreen> {
                             email: emailController.text,
                             password: passwordController.text);
                         await login_post(context, user);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
                       },
                       child: Text("Login", style: putColor(Colors.white, 16)),
                       style: ElevatedButton.styleFrom(
